@@ -1,7 +1,6 @@
-
 <html>
 <head>
-    <title>KLU Hostel Mess App</title>
+    <title>KLU Hostel Mess</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
@@ -9,19 +8,49 @@
         body {
             font-family: 'Roboto', sans-serif;
         }
+        .hostel-image {
+            height: 400px; /* Adjust height as needed */
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 2s;
+        }
     </style>
     <script>
+        let feedbackData = {
+            himalaya: [],
+            tulip: []
+        };
+
         function showMenu(hostel) {
             document.getElementById('hostel-selection').style.display = 'none';
             document.getElementById('himalaya-menu').style.display = 'none';
             document.getElementById('tulip-menu').style.display = 'none';
             document.getElementById(hostel + '-menu').style.display = 'block';
+            displayFeedback(hostel);
         }
 
         function submitFeedback(hostel) {
             const feedback = document.getElementById(hostel + '-feedback').value;
             const rating = document.getElementById(hostel + '-rating').value;
+            feedbackData[hostel].push({ feedback, rating });
             alert('Feedback: ' + feedback + '\nRating: ' + rating + ' stars');
+            displayFeedback(hostel);
+        }
+
+        function displayFeedback(hostel) {
+            const feedbackList = document.getElementById(hostel + '-feedback-list');
+            feedbackList.innerHTML = '';
+            feedbackData[hostel].forEach((item, index) => {
+                const feedbackItem = document.createElement('div');
+                feedbackItem.className = 'bg-gray-100 p-2 rounded mb-2';
+                feedbackItem.innerHTML = `<p>${item.feedback}</p><p>Rating: ${item.rating} stars</p>`;
+                feedbackList.appendChild(feedbackItem);
+            });
         }
 
         function updateMenu() {
@@ -57,17 +86,24 @@
             document.getElementById('tulip-dinner').innerText = tulipMenu[today].dinner;
         }
 
+        function goHome() {
+            document.getElementById('hostel-selection').style.display = 'block';
+            document.getElementById('himalaya-menu').style.display = 'none';
+            document.getElementById('tulip-menu').style.display = 'none';
+        }
+
         window.onload = updateMenu;
     </script>
 </head>
 <body class="bg-gray-100">
-    <header class="bg-red-600 text-white p-4">
+    <header class="bg-red-600 text-white p-4 fade-in">
         <div class="container mx-auto flex justify-between items-center">
+            <img src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105301.png" alt="KLU Logo" class="h-16 mr-4"/>
             <h1 class="text-2xl font-bold">KLU Hostel Mess App</h1>
             <nav>
                 <ul class="flex space-x-4">
                     <li>
-                        <a class="hover:underline" href="#" onclick="location.reload()">Home</a>
+                        <a class="hover:underline" href="#" onclick="goHome()">Home</a>
                     </li>
                 </ul>
             </nav>
@@ -78,12 +114,12 @@
             <h2 class="text-xl font-bold mb-4">Select Hostel</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white p-4 rounded shadow text-center">
-                    <img alt="Image of Himalaya Girls Hostel" class="w-full h-48 object-cover rounded mb-4" height="400" src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105958.png" width="600"/>
+                    <img alt="Image of Himalaya Girls Hostel" class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105958.png"/>
                     <h3 class="text-lg font-bold mb-2">Himalaya Girls Hostel</h3>
                     <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="showMenu('himalaya')">Select</button>
                 </div>
                 <div class="bg-white p-4 rounded shadow text-center">
-                    <img alt="Image of Tulip Boys Hostel" class="w-full h-48 object-cover rounded mb-4" height="400" src="https://storage.googleapis.com/a1aa/image/8ixipPlxOvpoB50UfyPdwaAYNfd7jmXjNIaGfeSUVnMyQfYeE.jpg" width="600"/>
+                    <img alt="Image of Tulip Boys Hostel" class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrzfg8u/tulip.jpg"/>
                     <h3 class="text-lg font-bold mb-2">Tulip Boys Hostel</h3>
                     <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="showMenu('tulip')">Select</button>
                 </div>
@@ -124,6 +160,10 @@
                 </div>
                 <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="submitFeedback('himalaya')">Submit Feedback</button>
             </div>
+            <div class="mt-8">
+                <h3 class="text-lg font-bold mb-2">Feedback Results</h3>
+                <div id="himalaya-feedback-list" class="space-y-2"></div>
+            </div>
         </section>
         <section class="mb-8 hidden" id="tulip-menu">
             <h2 class="text-xl font-bold mb-4">Tulip Boys Hostel Menu</h2>
@@ -160,11 +200,15 @@
                 </div>
                 <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="submitFeedback('tulip')">Submit Feedback</button>
             </div>
+            <div class="mt-8">
+                <h3 class="text-lg font-bold mb-2">Feedback Results</h3>
+                <div id="tulip-feedback-list" class="space-y-2"></div>
+            </div>
         </section>
     </main>
     <footer class="bg-red-600 text-white p-4 mt-8">
         <div class="container mx-auto text-center">
-            <p>© 2023 KLU Hostel Mess App. All rights reserved.</p>
+            <p>© 2024 KLU Hostel Mess App. All rights reserved.</p>
         </div>
     </footer>
 </body>
