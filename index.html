@@ -57,7 +57,7 @@
             feedbackData[hostel].forEach((item) => {
                 const feedbackItem = document.createElement('div');
                 feedbackItem.className = 'bg-gray-100 p-2 rounded mb-2';
-                feedbackItem.innerHTML = `<p>Rating: ${item.rating} stars</p>`;
+                feedbackItem.innerHTML = `<p>Rating: ${item.rating} stars</p><p>Feedback: ${item.feedback}</p>`;
                 feedbackList.appendChild(feedbackItem);
             });
         }
@@ -105,12 +105,21 @@
 <body class="bg-gray-100">
     <header class="bg-red-600 text-white p-4 fade-in">
         <div class="container mx-auto flex justify-between items-center">
-            <img src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105301.png" alt="KLU Logo" class="h-16 mr-4" />
+            <img src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105301.png" alt="KLU Logo" class="h-16 mr-4 cursor-pointer" onclick="goHome()" />
             <h1 class="text-2xl font-bold">KLU Hostel Mess App</h1>
             <nav>
                 <ul class="flex space-x-4">
                     <li>
                         <a class="hover:underline" href="#" onclick="goHome()">Home</a>
+                    </li>
+                    <li>
+                        <a class="hover:underline" href="https://newerp.kluniversity.in/" target="_blank">ERP</a>
+                    </li>
+                    <li>
+                        <a class="hover:underline" href="https://lms.kluniversity.in/login/index.php" target="_blank">LMS</a>
+                    </li>
+                    <li>
+                        <a class="hover:underline" href="https://academics.klef.in/login" target="_blank">Academics</a>
                     </li>
                 </ul>
             </nav>
