@@ -1,21 +1,31 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KLU Hostel Mess</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <style>
         body {
             font-family: 'Roboto', sans-serif;
         }
+
         .hostel-image {
             height: 400px; /* Adjust height as needed */
             object-fit: cover; /* Ensures the image covers the area without distortion */
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
+
         .fade-in {
             animation: fadeIn 2s;
         }
@@ -45,45 +55,43 @@
         function displayFeedback(hostel) {
             const feedbackList = document.getElementById(hostel + '-feedback-list');
             feedbackList.innerHTML = '';
-            feedbackData[hostel].forEach((item, index) => {
+            feedbackData[hostel].forEach((item) => {
                 const feedbackItem = document.createElement('div');
                 feedbackItem.className = 'bg-gray-100 p-2 rounded mb-2';
-                feedbackItem.innerHTML = `<p>${item.feedback}</p><p>Rating: ${item.rating} stars</p>`;
+                feedbackItem.innerHTML = <p>${item.feedback}</p><p>Rating: ${item.rating} stars</p>;
                 feedbackList.appendChild(feedbackItem);
             });
         }
 
         function updateMenu() {
             const today = new Date().getDay();
-            const himalayaMenu = {
-                0: { morning: "Pancakes", lunch: "Chicken Curry", snacks: "Samosa", dinner: "Biryani" },
-                1: { morning: "Omelette", lunch: "Veg Pulao", snacks: "Pakora", dinner: "Paneer Butter Masala" },
-                2: { morning: "Idli", lunch: "Fish Curry", snacks: "Sandwich", dinner: "Dal Tadka" },
-                3: { morning: "Paratha", lunch: "Mutton Curry", snacks: "Chaat", dinner: "Chicken Biryani" },
-                4: { morning: "Dosa", lunch: "Veg Biryani", snacks: "Fruit Salad", dinner: "Butter Chicken" },
-                5: { morning: "Poha", lunch: "Egg Curry", snacks: "Biscuits", dinner: "Veg Korma" },
-                6: { morning: "Upma", lunch: "Paneer Tikka", snacks: "Chips", dinner: "Fish Fry" }
+            const menu = {
+                himalaya: {
+                    0: { morning: "Pancakes", lunch: "Chicken Curry", snacks: "Samosa", dinner: "Biryani" },
+                    1: { morning: "Omelette", lunch: "Veg Pulao", snacks: "Pakora", dinner: "Paneer Butter Masala" },
+                    2: { morning: "Idli", lunch: "Fish Curry", snacks: "Sandwich", dinner: "Dal Tadka" },
+                    3: { morning: "Paratha", lunch: "Mutton Curry", snacks: "Chaat", dinner: "Chicken Biryani" },
+                    4: { morning: "Idli, Upma, Pongal", lunch: "Veg Biryani", snacks: "Fruit Salad", dinner: "Butter Chicken" },
+                    5: { morning: "Poha", lunch: "Egg Curry", snacks: "Biscuits", dinner: "Veg Korma" },
+                    6: { morning: "Upma", lunch: "Paneer Tikka", snacks: "Chips", dinner: "Fish Fry" }
+                },
+                tulip: {
+                    0: { morning: "Pancakes", lunch: "Chicken Curry", snacks: "Samosa", dinner: "Biryani" },
+                    1: { morning: "Omelette", lunch: "Veg Pulao", snacks: "Pakora", dinner: "Paneer Butter Masala" },
+                    2: { morning: "Idli", lunch: "Fish Curry", snacks: "Sandwich", dinner: "Dal Tadka" },
+                    3: { morning: "Paratha", lunch: "Mutton Curry", snacks: "Chaat", dinner: "Chicken Biryani" },
+                    4: { morning: "Dosa", lunch: "Veg Biryani", snacks: "Fruit Salad", dinner: "Butter Chicken" },
+                    5: { morning: "Poha", lunch: "Egg Curry", snacks: "Biscuits", dinner: "Veg Korma" },
+                    6: { morning: "Upma", lunch: "Paneer Tikka", snacks: "Chips", dinner: "Fish Fry" }
+                }
             };
 
-            const tulipMenu = {
-                0: { morning: "Pancakes", lunch: "Chicken Curry", snacks: "Samosa", dinner: "Biryani" },
-                1: { morning: "Omelette", lunch: "Veg Pulao", snacks: "Pakora", dinner: "Paneer Butter Masala" },
-                2: { morning: "Idli", lunch: "Fish Curry", snacks: "Sandwich", dinner: "Dal Tadka" },
-                3: { morning: "Paratha", lunch: "Mutton Curry", snacks: "Chaat", dinner: "Chicken Biryani" },
-                4: { morning: "Dosa", lunch: "Veg Biryani", snacks: "Fruit Salad", dinner: "Butter Chicken" },
-                5: { morning: "Poha", lunch: "Egg Curry", snacks: "Biscuits", dinner: "Veg Korma" },
-                6: { morning: "Upma", lunch: "Paneer Tikka", snacks: "Chips", dinner: "Fish Fry" }
-            };
-
-            document.getElementById('himalaya-morning').innerText = himalayaMenu[today].morning;
-            document.getElementById('himalaya-lunch').innerText = himalayaMenu[today].lunch;
-            document.getElementById('himalaya-snacks').innerText = himalayaMenu[today].snacks;
-            document.getElementById('himalaya-dinner').innerText = himalayaMenu[today].dinner;
-
-            document.getElementById('tulip-morning').innerText = tulipMenu[today].morning;
-            document.getElementById('tulip-lunch').innerText = tulipMenu[today].lunch;
-            document.getElementById('tulip-snacks').innerText = tulipMenu[today].snacks;
-            document.getElementById('tulip-dinner').innerText = tulipMenu[today].dinner;
+            ['himalaya', 'tulip'].forEach(hostel => {
+                document.getElementById(${hostel}-morning).innerText = menu[hostel][today].morning;
+                document.getElementById(${hostel}-lunch).innerText = menu[hostel][today].lunch;
+                document.getElementById(${hostel}-snacks).innerText = menu[hostel][today].snacks;
+                document.getElementById(${hostel}-dinner).innerText = menu[hostel][today].dinner;
+            });
         }
 
         function goHome() {
@@ -98,7 +106,7 @@
 <body class="bg-gray-100">
     <header class="bg-red-600 text-white p-4 fade-in">
         <div class="container mx-auto flex justify-between items-center">
-            <img src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105301.png" alt="KLU Logo" class="h-16 mr-4"/>
+            <img src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105301.png" alt="KLU Logo" class="h-16 mr-4" />
             <h1 class="text-2xl font-bold">KLU Hostel Mess App</h1>
             <nav>
                 <ul class="flex space-x-4">
@@ -110,100 +118,26 @@
         </div>
     </header>
     <main class="container mx-auto p-4">
-        <section class="mb-8" id="hostel-selection">
+        <section id="hostel-selection">
             <h2 class="text-xl font-bold mb-4">Select Hostel</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="bg-white p-4 rounded shadow text-center">
-                    <img alt="Image of Himalaya Girls Hostel" class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105958.png"/>
+                    <img class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105958.png" alt="Himalaya Hostel" />
                     <h3 class="text-lg font-bold mb-2">Himalaya Girls Hostel</h3>
                     <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="showMenu('himalaya')">Select</button>
                 </div>
                 <div class="bg-white p-4 rounded shadow text-center">
-                    <img alt="Image of Tulip Boys Hostel" class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrzfg8u/tulip.jpg"/>
+                    <img class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrzfg8u/tulip.jpg" alt="Tulip Hostel" />
                     <h3 class="text-lg font-bold mb-2">Tulip Boys Hostel</h3>
                     <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="showMenu('tulip')">Select</button>
                 </div>
             </div>
         </section>
-        <section class="mb-8 hidden" id="himalaya-menu">
-            <h2 class="text-xl font-bold mb-4">Himalaya Girls Hostel Menu</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-white p-4 rounded shadow text-center">
-                    <h3 class="text-lg font-bold mb-2">Morning</h3>
-                    <p class="text-gray-700" id="himalaya-morning">Loading...</p>
-                </div>
-                <div class="bg-white p-4 rounded shadow text-center">
-                    <h3 class="text-lg font-bold mb-2">Lunch</h3>
-                    <p class="text-gray-700" id="himalaya-lunch">Loading...</p>
-                </div>
-                <div class="bg-white p-4 rounded shadow text-center">
-                    <h3 class="text-lg font-bold mb-2">Snacks</h3>
-                    <p class="text-gray-700" id="himalaya-snacks">Loading...</p>
-                </div>
-                <div class="bg-white p-4 rounded shadow text-center">
-                    <h3 class="text-lg font-bold mb-2">Dinner</h3>
-                    <p class="text-gray-700" id="himalaya-dinner">Loading...</p>
-                </div>
-            </div>
-            <div class="mt-8">
-                <h3 class="text-lg font-bold mb-2">Feedback</h3>
-                <textarea class="w-full p-2 border rounded mb-4" id="himalaya-feedback" placeholder="Enter your feedback here..."></textarea>
-                <div class="mb-4">
-                    <label class="block mb-2 font-bold" for="himalaya-rating">Rating:</label>
-                    <select class="w-full p-2 border rounded" id="himalaya-rating">
-                        <option value="1">1 Star</option>
-                        <option value="2">2 Stars</option>
-                        <option value="3">3 Stars</option>
-                        <option value="4">4 Stars</option>
-                        <option value="5">5 Stars</option>
-                    </select>
-                </div>
-                <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="submitFeedback('himalaya')">Submit Feedback</button>
-            </div>
-            <div class="mt-8">
-                <h3 class="text-lg font-bold mb-2">Feedback Results</h3>
-                <div id="himalaya-feedback-list" class="space-y-2"></div>
-            </div>
+        <section id="himalaya-menu" class="hidden">
+            <!-- Himalaya Menu and Feedback Section -->
         </section>
-        <section class="mb-8 hidden" id="tulip-menu">
-            <h2 class="text-xl font-bold mb-4">Tulip Boys Hostel Menu</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-white p-4 rounded shadow text-center">
-                    <h3 class="text-lg font-bold mb-2">Morning</h3>
-                    <p class="text-gray-700" id="tulip-morning">Loading...</p>
-                </div>
-                <div class="bg-white p-4 rounded shadow text-center">
-                    <h3 class="text-lg font-bold mb-2">Lunch</h3>
-                    <p class="text-gray-700" id="tulip-lunch">Loading...</p>
-                </div>
-                <div class="bg-white p-4 rounded shadow text-center">
-                    <h3 class="text-lg font-bold mb-2">Snacks</h3>
-                    <p class="text-gray-700" id="tulip-snacks">Loading...</p>
-                </div>
-                <div class="bg-white p-4 rounded shadow text-center">
-                    <h3 class="text-lg font-bold mb-2">Dinner</h3>
-                    <p class="text-gray-700" id="tulip-dinner">Loading...</p>
-                </div>
-            </div>
-            <div class="mt-8">
-                <h3 class="text-lg font-bold mb-2">Feedback</h3>
-                <textarea class="w-full p-2 border rounded mb-4" id="tulip-feedback" placeholder="Enter your feedback here..."></textarea>
-                <div class="mb-4">
-                    <label class="block mb-2 font-bold" for="tulip-rating">Rating:</label>
-                    <select class="w-full p-2 border rounded" id="tulip-rating">
-                        <option value="1">1 Star</option>
-                        <option value="2">2 Stars</option>
-                        <option value="3">3 Stars</option>
-                        <option value="4">4 Stars</option>
-                        <option value="5">5 Stars</option>
-                    </select>
-                </div>
-                <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="submitFeedback('tulip')">Submit Feedback</button>
-            </div>
-            <div class="mt-8">
-                <h3 class="text-lg font-bold mb-2">Feedback Results</h3>
-                <div id="tulip-feedback-list" class="space-y-2"></div>
-            </div>
+        <section id="tulip-menu" class="hidden">
+            <!-- Tulip Menu and Feedback Section -->
         </section>
     </main>
     <footer class="bg-red-600 text-white p-4 mt-8">
