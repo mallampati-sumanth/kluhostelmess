@@ -1,4 +1,7 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello, World!</title>a<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,39 +59,28 @@
         .bounce-in {
             animation: bounceIn 1s;
         }
+
+        .star {
+            cursor: pointer;
+            font-size: 2rem;
+            color: #ccc;
+        }
+
+        .star.selected {
+            color: #f5c518;
+        }
     </style>
     <script>
-        let feedbackData = {
-            himalaya: [],
-            tulip: []
-        };
-
         function showMenu(hostel) {
             document.getElementById('hostel-selection').classList.add('hidden');
             document.getElementById('himalaya-menu').classList.add('hidden');
             document.getElementById('tulip-menu').classList.add('hidden');
             document.getElementById(hostel + '-menu').classList.remove('hidden');
             document.getElementById(hostel + '-menu').classList.add('slide-in');
-            displayFeedback(hostel);
         }
 
-        function submitFeedback(hostel) {
-            const feedback = document.getElementById(hostel + '-feedback').value;
-            const rating = document.getElementById(hostel + '-rating').value;
-            feedbackData[hostel].push({ feedback, rating });
-            alert('Feedback: ' + feedback + '\nRating: ' + rating + ' stars');
-            displayFeedback(hostel);
-        }
-
-        function displayFeedback(hostel) {
-            const feedbackList = document.getElementById(hostel + '-feedback-list');
-            feedbackList.innerHTML = '';
-            feedbackData[hostel].forEach((item) => {
-                const feedbackItem = document.createElement('div');
-                feedbackItem.className = 'bg-gray-100 p-2 rounded mb-2 bounce-in';
-                feedbackItem.innerHTML = `<p>Rating: ${item.rating} stars</p><p>Feedback: ${item.feedback}</p>`;
-                feedbackList.appendChild(feedbackItem);
-            });
+        function submitFeedback(hostel, rating) {
+            alert('Rating: ' + rating + ' stars');
         }
 
         function updateMenu() {
@@ -129,6 +121,18 @@
             document.getElementById('tulip-menu').classList.add('hidden');
         }
 
+        function rateMenu(hostel, rating) {
+            const stars = document.querySelectorAll(`#${hostel}-menu .star`);
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+            submitFeedback(hostel, rating);
+        }
+
         window.onload = updateMenu;
     </script>
 </head>
@@ -136,7 +140,7 @@
     <header class="bg-red-600 text-white p-4 fade-in">
         <div class="container mx-auto flex flex-wrap justify-between items-center">
             <div class="flex items-center">
-                <img src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105301.png" alt="KLU Logo" class="h-16 mr-4 cursor-pointer" onclick="goHome()" />
+                <img src="https://assets.onecompiler.app/42fq36qvd/42yt2y2bp/Screenshot%202024-11-21%20221555.png" alt="KLU Logo" class="h-16 mr-4 cursor-pointer" onclick="goHome()" />
                 <h1 class="text-2xl font-bold">KLU Hostel Mess</h1>
             </div>
             <nav class="w-full md:w-auto mt-4 md:mt-0">
@@ -183,20 +187,14 @@
                 <p><strong>Dinner:</strong> <span id="himalaya-dinner"></span></p>
             </div>
             <div class="bg-white p-4 rounded shadow mb-4">
-                <h3 class="text-lg font-bold mb-2">Feedback</h3>
-                <textarea class="w-full p-2 border rounded mb-2" id="himalaya-feedback" placeholder="Enter your feedback"></textarea>
-                <select class="w-full p-2 border rounded mb-2" id="himalaya-rating">
-                    <option value="1">1 Star</option>
-                    <option value="2">2 Stars</option>
-                    <option value="3">3 Stars</option>
-                    <option value="4">4 Stars</option>
-                    <option value="5">5 Stars</option>
-                </select>
-                <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="submitFeedback('himalaya')">Submit Feedback</button>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold mb-2">Feedback List</h3>
-                <div id="himalaya-feedback-list"></div>
+                <h3 class="text-lg font-bold mb-2">Rate Today's Menu</h3>
+                <div class="flex space-x-2">
+                    <span class="star" onclick="rateMenu('himalaya', 1)">★</span>
+                    <span class="star" onclick="rateMenu('himalaya', 2)">★</span>
+                    <span class="star" onclick="rateMenu('himalaya', 3)">★</span>
+                    <span class="star" onclick="rateMenu('himalaya', 4)">★</span>
+                    <span class="star" onclick="rateMenu('himalaya', 5)">★</span>
+                </div>
             </div>
         </section>
         <section id="tulip-menu" class="hidden">
@@ -209,20 +207,14 @@
                 <p><strong>Dinner:</strong> <span id="tulip-dinner"></span></p>
             </div>
             <div class="bg-white p-4 rounded shadow mb-4">
-                <h3 class="text-lg font-bold mb-2">Feedback</h3>
-                <textarea class="w-full p-2 border rounded mb-2" id="tulip-feedback" placeholder="Enter your feedback"></textarea>
-                <select class="w-full p-2 border rounded mb-2" id="tulip-rating">
-                    <option value="1">1 Star</option>
-                    <option value="2">2 Stars</option>
-                    <option value="3">3 Stars</option>
-                    <option value="4">4 Stars</option>
-                    <option value="5">5 Stars</option>
-                </select>
-                <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="submitFeedback('tulip')">Submit Feedback</button>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="text-lg font-bold mb-2">Feedback List</h3>
-                <div id="tulip-feedback-list"></div>
+                <h3 class="text-lg font-bold mb-2">Rate Today's Menu</h3>
+                <div class="flex space-x-2">
+                    <span class="star" onclick="rateMenu('tulip', 1)">★</span>
+                    <span class="star" onclick="rateMenu('tulip', 2)">★</span>
+                    <span class="star" onclick="rateMenu('tulip', 3)">★</span>
+                    <span class="star" onclick="rateMenu('tulip', 4)">★</span>
+                    <span class="star" onclick="rateMenu('tulip', 5)">★</span>
+                </div>
             </div>
         </section>
         <section id="useful-links" class="fade-in mt-8">
@@ -255,4 +247,12 @@
         </div>
     </footer>
 </body>
+</html>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+      <h1 class="title">Hello World! </h1>
+      <p id="currentTime"></p>
+      <script src="script.js"></script>
+  </body>
 </html>
