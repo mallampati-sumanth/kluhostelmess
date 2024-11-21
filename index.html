@@ -28,6 +28,34 @@
         .fade-in {
             animation: fadeIn 2s;
         }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 1s;
+        }
+
+        @keyframes bounceIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .bounce-in {
+            animation: bounceIn 1s;
+        }
     </style>
     <script>
         let feedbackData = {
@@ -36,10 +64,11 @@
         };
 
         function showMenu(hostel) {
-            document.getElementById('hostel-selection').style.display = 'none';
-            document.getElementById('himalaya-menu').style.display = 'none';
-            document.getElementById('tulip-menu').style.display = 'none';
-            document.getElementById(hostel + '-menu').style.display = 'block';
+            document.getElementById('hostel-selection').classList.add('hidden');
+            document.getElementById('himalaya-menu').classList.add('hidden');
+            document.getElementById('tulip-menu').classList.add('hidden');
+            document.getElementById(hostel + '-menu').classList.remove('hidden');
+            document.getElementById(hostel + '-menu').classList.add('slide-in');
             displayFeedback(hostel);
         }
 
@@ -56,7 +85,7 @@
             feedbackList.innerHTML = '';
             feedbackData[hostel].forEach((item) => {
                 const feedbackItem = document.createElement('div');
-                feedbackItem.className = 'bg-gray-100 p-2 rounded mb-2';
+                feedbackItem.className = 'bg-gray-100 p-2 rounded mb-2 bounce-in';
                 feedbackItem.innerHTML = `<p>Rating: ${item.rating} stars</p><p>Feedback: ${item.feedback}</p>`;
                 feedbackList.appendChild(feedbackItem);
             });
@@ -94,9 +123,10 @@
         }
 
         function goHome() {
-            document.getElementById('hostel-selection').style.display = 'block';
-            document.getElementById('himalaya-menu').style.display = 'none';
-            document.getElementById('tulip-menu').style.display = 'none';
+            document.getElementById('hostel-selection').classList.remove('hidden');
+            document.getElementById('hostel-selection').classList.add('fade-in');
+            document.getElementById('himalaya-menu').classList.add('hidden');
+            document.getElementById('tulip-menu').classList.add('hidden');
         }
 
         window.onload = updateMenu;
@@ -112,29 +142,20 @@
                     <li>
                         <a class="hover:underline" href="#" onclick="goHome()">Home</a>
                     </li>
-                    <li>
-                        <a class="hover:underline" href="https://newerp.kluniversity.in/" target="_blank">ERP</a>
-                    </li>
-                    <li>
-                        <a class="hover:underline" href="https://lms.kluniversity.in/login/index.php" target="_blank">LMS</a>
-                    </li>
-                    <li>
-                        <a class="hover:underline" href="https://academics.klef.in/login" target="_blank">Academics</a>
-                    </li>
                 </ul>
             </nav>
         </div>
     </header>
     <main class="container mx-auto p-4">
-        <section id="hostel-selection">
+        <section id="hostel-selection" class="fade-in">
             <h2 class="text-xl font-bold mb-4">Select Hostel</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="bg-white p-4 rounded shadow text-center">
+                <div class="bg-white p-4 rounded shadow text-center bounce-in">
                     <img class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105958.png" alt="Himalaya Hostel" />
                     <h3 class="text-lg font-bold mb-2">Himalaya Girls Hostel</h3>
                     <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="showMenu('himalaya')">Select</button>
                 </div>
-                <div class="bg-white p-4 rounded shadow text-center">
+                <div class="bg-white p-4 rounded shadow text-center bounce-in">
                     <img class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrzfg8u/tulip.jpg" alt="Tulip Hostel" />
                     <h3 class="text-lg font-bold mb-2">Tulip Boys Hostel</h3>
                     <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="showMenu('tulip')">Select</button>
