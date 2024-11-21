@@ -134,13 +134,24 @@
 </head>
 <body class="bg-gray-100">
     <header class="bg-red-600 text-white p-4 fade-in">
-        <div class="container mx-auto flex justify-between items-center">
-            <img src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105301.png" alt="KLU Logo" class="h-16 mr-4 cursor-pointer" onclick="goHome()" />
-            <h1 class="text-2xl font-bold">KLU Hostel Mess App</h1>
-            <nav>
-                <ul class="flex space-x-4">
+        <div class="container mx-auto flex flex-wrap justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105301.png" alt="KLU Logo" class="h-16 mr-4 cursor-pointer" onclick="goHome()" />
+                <h1 class="text-2xl font-bold">KLU Hostel Mess</h1>
+            </div>
+            <nav class="w-full md:w-auto mt-4 md:mt-0">
+                <ul class="flex flex-col md:flex-row md:space-x-4">
                     <li>
                         <a class="hover:underline" href="#" onclick="goHome()">Home</a>
+                    </li>
+                    <li>
+                        <a class="hover:underline" href="https://newerp.kluniversity.in/" target="_blank">ERP</a>
+                    </li>
+                    <li>
+                        <a class="hover:underline" href="https://lms.kluniversity.in/login/index.php" target="_blank">LMS</a>
+                    </li>
+                    <li>
+                        <a class="hover:underline" href="https://academics.klef.in/login" target="_blank">Academics</a>
                     </li>
                 </ul>
             </nav>
@@ -214,10 +225,33 @@
                 <div id="tulip-feedback-list"></div>
             </div>
         </section>
+        <section id="useful-links" class="fade-in mt-8">
+            <h2 class="text-xl font-bold mb-4">Useful Links</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-white p-4 rounded shadow text-center bounce-in">
+                    <a href="https://newerp.kluniversity.in/" target="_blank" class="text-blue-600 hover:underline">
+                        <i class="fas fa-link fa-2x mb-2"></i>
+                        <h3 class="text-lg font-bold">ERP</h3>
+                    </a>
+                </div>
+                <div class="bg-white p-4 rounded shadow text-center bounce-in">
+                    <a href="https://lms.kluniversity.in/login/index.php" target="_blank" class="text-blue-600 hover:underline">
+                        <i class="fas fa-link fa-2x mb-2"></i>
+                        <h3 class="text-lg font-bold">LMS</h3>
+                    </a>
+                </div>
+                <div class="bg-white p-4 rounded shadow text-center bounce-in">
+                    <a href="https://academics.klef.in/login" target="_blank" class="text-blue-600 hover:underline">
+                        <i class="fas fa-link fa-2x mb-2"></i>
+                        <h3 class="text-lg font-bold">Academics</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
     <footer class="bg-red-600 text-white p-4 mt-8">
         <div class="container mx-auto text-center">
-            <p>© 2024 KLU Hostel Mess App. All rights reserved.</p>
+            <p>© 2024 KLU Hostel Mess. All rights reserved.</p>
         </div>
     </footer>
 </body>
