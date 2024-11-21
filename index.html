@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -58,7 +57,7 @@
             feedbackData[hostel].forEach((item) => {
                 const feedbackItem = document.createElement('div');
                 feedbackItem.className = 'bg-gray-100 p-2 rounded mb-2';
-                feedbackItem.innerHTML = <p>${item.feedback}</p><p>Rating: ${item.rating} stars</p>;
+                feedbackItem.innerHTML = `<p>Rating: ${item.rating} stars</p>`;
                 feedbackList.appendChild(feedbackItem);
             });
         }
@@ -87,10 +86,10 @@
             };
 
             ['himalaya', 'tulip'].forEach(hostel => {
-                document.getElementById(${hostel}-morning).innerText = menu[hostel][today].morning;
-                document.getElementById(${hostel}-lunch).innerText = menu[hostel][today].lunch;
-                document.getElementById(${hostel}-snacks).innerText = menu[hostel][today].snacks;
-                document.getElementById(${hostel}-dinner).innerText = menu[hostel][today].dinner;
+                document.getElementById(`${hostel}-morning`).innerText = menu[hostel][today].morning;
+                document.getElementById(`${hostel}-lunch`).innerText = menu[hostel][today].lunch;
+                document.getElementById(`${hostel}-snacks`).innerText = menu[hostel][today].snacks;
+                document.getElementById(`${hostel}-dinner`).innerText = menu[hostel][today].dinner;
             });
         }
 
@@ -134,10 +133,56 @@
             </div>
         </section>
         <section id="himalaya-menu" class="hidden">
-            <!-- Himalaya Menu and Feedback Section -->
+            <h2 class="text-xl font-bold mb-4">Himalaya Girls Hostel Menu</h2>
+            <div class="bg-white p-4 rounded shadow mb-4">
+                <h3 class="text-lg font-bold mb-2">Today's Menu</h3>
+                <p><strong>Morning:</strong> <span id="himalaya-morning"></span></p>
+                <p><strong>Lunch:</strong> <span id="himalaya-lunch"></span></p>
+                <p><strong>Snacks:</strong> <span id="himalaya-snacks"></span></p>
+                <p><strong>Dinner:</strong> <span id="himalaya-dinner"></span></p>
+            </div>
+            <div class="bg-white p-4 rounded shadow mb-4">
+                <h3 class="text-lg font-bold mb-2">Feedback</h3>
+                <textarea class="w-full p-2 border rounded mb-2" id="himalaya-feedback" placeholder="Enter your feedback"></textarea>
+                <select class="w-full p-2 border rounded mb-2" id="himalaya-rating">
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="submitFeedback('himalaya')">Submit Feedback</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="text-lg font-bold mb-2">Feedback List</h3>
+                <div id="himalaya-feedback-list"></div>
+            </div>
         </section>
         <section id="tulip-menu" class="hidden">
-            <!-- Tulip Menu and Feedback Section -->
+            <h2 class="text-xl font-bold mb-4">Tulip Boys Hostel Menu</h2>
+            <div class="bg-white p-4 rounded shadow mb-4">
+                <h3 class="text-lg font-bold mb-2">Today's Menu</h3>
+                <p><strong>Morning:</strong> <span id="tulip-morning"></span></p>
+                <p><strong>Lunch:</strong> <span id="tulip-lunch"></span></p>
+                <p><strong>Snacks:</strong> <span id="tulip-snacks"></span></p>
+                <p><strong>Dinner:</strong> <span id="tulip-dinner"></span></p>
+            </div>
+            <div class="bg-white p-4 rounded shadow mb-4">
+                <h3 class="text-lg font-bold mb-2">Feedback</h3>
+                <textarea class="w-full p-2 border rounded mb-2" id="tulip-feedback" placeholder="Enter your feedback"></textarea>
+                <select class="w-full p-2 border rounded mb-2" id="tulip-rating">
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded" onclick="submitFeedback('tulip')">Submit Feedback</button>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="text-lg font-bold mb-2">Feedback List</h3>
+                <div id="tulip-feedback-list"></div>
+            </div>
         </section>
     </main>
     <footer class="bg-red-600 text-white p-4 mt-8">
