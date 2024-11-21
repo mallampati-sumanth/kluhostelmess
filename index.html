@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Hello, World!</title>a<html lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,6 +66,56 @@
         .star.selected {
             color: #f5c518;
         }
+
+        @keyframes welcomeAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .welcome-animation {
+            animation: welcomeAnimation 1s ease-in-out;
+        }
+
+        .logo-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        @keyframes logoMove {
+            0% {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                top: 16px;
+                left: 16px;
+                transform: translate(0, 0) scale(0.25);
+            }
+        }
+
+        .logo-animation {
+            position: absolute;
+            animation: logoMove 1s forwards;
+        }
     </style>
     <script>
         function showMenu(hostel) {
@@ -133,10 +180,18 @@
             submitFeedback(hostel, rating);
         }
 
-        window.onload = updateMenu;
+        window.onload = function() {
+            updateMenu();
+            setTimeout(() => {
+                document.getElementById('logo-overlay').style.display = 'none';
+            }, 1000);
+        };
     </script>
 </head>
 <body class="bg-gray-100">
+    <div id="logo-overlay" class="logo-overlay">
+        <img src="https://assets.onecompiler.app/42fq36qvd/42yt2y2bp/Screenshot%202024-11-21%20221555.png" alt="KLU Logo" class="logo-animation" />
+    </div>
     <header class="bg-red-600 text-white p-4 fade-in">
         <div class="container mx-auto flex flex-wrap justify-between items-center">
             <div class="flex items-center">
@@ -247,12 +302,4 @@
         </div>
     </footer>
 </body>
-</html>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-      <h1 class="title">Hello World! </h1>
-      <p id="currentTime"></p>
-      <script src="script.js"></script>
-  </body>
 </html>
