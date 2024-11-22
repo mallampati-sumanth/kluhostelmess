@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -125,6 +124,7 @@
             document.getElementById('tulip-menu').classList.add('hidden');
             document.getElementById(hostel + '-menu').classList.remove('hidden');
             document.getElementById(hostel + '-menu').classList.add('slide-in');
+            history.pushState({ page: hostel }, "", `#${hostel}`);
         }
 
         function submitFeedback(hostel, rating) {
@@ -167,6 +167,7 @@
             document.getElementById('hostel-selection').classList.add('fade-in');
             document.getElementById('himalaya-menu').classList.add('hidden');
             document.getElementById('tulip-menu').classList.add('hidden');
+            history.pushState({ page: "home" }, "", "#home");
         }
 
         function rateMenu(hostel, rating) {
@@ -194,6 +195,29 @@
             setTimeout(() => {
                 document.getElementById('logo-overlay').style.display = 'none';
             }, 1000);
+
+            window.onpopstate = function(event) {
+                if (event.state && event.state.page) {
+                    if (event.state.page === "home") {
+                        goHome();
+                    } else {
+                        showMenu(event.state.page);
+                    }
+                } else {
+                    goHome();
+                }
+            };
+
+            if (location.hash) {
+                const page = location.hash.substring(1);
+                if (page === "home") {
+                    goHome();
+                } else {
+                    showMenu(page);
+                }
+            } else {
+                goHome();
+            }
         };
     </script>
 </head>
