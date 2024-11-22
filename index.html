@@ -12,8 +12,11 @@
         }
 
         .hostel-image {
-            height: 400px; /* Adjust height as needed */
+            height: 250px; /* Adjust height as needed */
             object-fit: cover; /* Ensures the image covers the area without distortion */
+            border: 5px solid transparent;
+            border-image: linear-gradient(to right, #ff0000, #ff7e5f);
+            border-image-slice: 1;
         }
 
         @keyframes fadeIn {
@@ -101,20 +104,25 @@
 
         @keyframes logoMove {
             0% {
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%) scale(1);
+                opacity: 0;
+                transform: scale(0.5);
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             }
             100% {
-                top: 16px;
-                left: 16px;
-                transform: translate(0, 0) scale(0.25);
+                opacity: 1;
+                transform: scale(1);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
             }
         }
 
         .logo-animation {
-            position: absolute;
             animation: logoMove 1s forwards;
+            border-radius: 50%;
         }
     </style>
     <script>
@@ -257,12 +265,12 @@
             <h2 class="text-2xl font-bold mb-4">Select Hostel</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="bg-white p-4 rounded shadow-lg text-center bounce-in transform transition duration-500 hover:scale-105">
-                    <img class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105958.png" alt="Himalaya Hostel" />
+                    <img class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrqetcx/Screenshot%202024-11-21%20105958.png" alt="Himalaya Girls Hostel building with a beautiful garden in front" />
                     <h3 class="text-xl font-bold mb-2">Himalaya Girls Hostel</h3>
                     <button class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition duration-300" onclick="showMenu('himalaya')">Select</button>
                 </div>
                 <div class="bg-white p-4 rounded shadow-lg text-center bounce-in transform transition duration-500 hover:scale-105">
-                    <img class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrzfg8u/tulip.jpg" alt="Tulip Hostel" />
+                    <img class="hostel-image w-full rounded mb-4" src="https://assets.onecompiler.app/42fq36qvd/42yrzfg8u/tulip.jpg" alt="Tulip Boys Hostel building with a modern architectural design" />
                     <h3 class="text-xl font-bold mb-2">Tulip Boys Hostel</h3>
                     <button class="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition duration-300" onclick="showMenu('tulip')">Select</button>
                 </div>
@@ -347,15 +355,4 @@
                     <a href="https://academics.klef.in/login" target="_blank" class="text-blue-600 hover:underline">
                         <i class="fas fa-link fa-2x mb-2"></i>
                         <h3 class="text-xl font-bold">Academics</h3>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer class="bg-gradient-to-r from-red-500 to-red-700 text-white p-4 mt-8 shadow-lg">
-        <div class="container mx-auto text-center">
-            <p>© 2024 KLU Hostel Mess. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html>
+                   
